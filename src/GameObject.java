@@ -5,7 +5,7 @@ public class GameObject {
 	int y;
 	int w;
 	int h;
-
+	boolean isAlive = true;
 	public GameObject(int x, int y, int w, int h) {
 		this.x = x;
 		this.y = y;
