@@ -24,14 +24,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	boolean KeyDown;
 	boolean KeyLeft;
 	boolean KeyRight;
+	boolean KeyW;
+	boolean KeyA;
+	boolean KeyD;
+	boolean KeyS;
 	ObjectManager om;
+
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titlefont = new Font("Arial", Font.PLAIN, 48);
 		subfont = new Font("Arial", Font.PLAIN, 35);
 		subfont2 = new Font("Arial", Font.PLAIN, 27);
 		rocket = new Rocketship(250, 700, 50, 50);
-		om=new ObjectManager(rocket);
+		om = new ObjectManager(rocket);
 	}
 
 	@Override
@@ -45,27 +50,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (currentstate == endstate) {
 			updateEndState();
 		}
-		if(KeyUp && KeyLeft) {
-			rocket.y-=rocket.speed;
-			rocket.x-=rocket.speed;
-		} else if(KeyUp && KeyRight) {
-			rocket.y-=rocket.speed;
-			rocket.x+=rocket.speed;
-		} else if(KeyDown && KeyLeft) {
-			rocket.y+=rocket.speed;
-			rocket.x-=rocket.speed;
-		} else if(KeyDown && KeyRight) {
-			rocket.y+=rocket.speed;
-			rocket.x+=rocket.speed;
-		} else if(KeyUp) {
-			rocket.y-=rocket.speed;
-		} else if(KeyLeft) {
-			rocket.x-=rocket.speed;
-		} else if(KeyDown) {
-			rocket.y+=rocket.speed;
-		} else if(KeyRight) {
-			rocket.x+=rocket.speed;
+		if (KeyUp && KeyLeft) {
+			rocket.y -= rocket.speed;
+			rocket.x -= rocket.speed;
+		} else if (KeyUp && KeyRight) {
+			rocket.y -= rocket.speed;
+			rocket.x += rocket.speed;
+		} else if (KeyDown && KeyLeft) {
+			rocket.y += rocket.speed;
+			rocket.x -= rocket.speed;
+		} else if (KeyDown && KeyRight) {
+			rocket.y += rocket.speed;
+			rocket.x += rocket.speed;
+		} else if (KeyUp) {
+			rocket.y -= rocket.speed;
+		} else if (KeyLeft) {
+			rocket.x -= rocket.speed;
+		} else if (KeyDown) {
+			rocket.y += rocket.speed;
+		} else if (KeyRight) {
+			rocket.x += rocket.speed;
 		}
+		if (KeyS) {
+			om.addProjectile(new Projectile(rocket.x + 20, rocket.y, 10, 10));
+		}
+
 	}
 
 	public void startGame() {
@@ -102,34 +111,62 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_I) {
 			if (currentstate == menustate) {
-				JOptionPane.showMessageDialog(null, "Press 'space' to shoot and use arrow keys to move");
+				JOptionPane.showMessageDialog(null, "Press 'space' to shoot and use arrow keys to move.");
 			}
 		}
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			KeyUp=true;
-		} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			KeyDown=true;
-		} else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			KeyLeft=true;
-		} else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			KeyRight=true;
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			KeyUp = true;
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			KeyDown = true;
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			KeyLeft = true;
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			KeyRight = true;
 		}
 
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			om.addProjectile(new Projectile(rocket.x + 20, rocket.y, 10, 10));
+		}
 
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			KeyW = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			KeyA = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			KeyS = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			KeyD = true;
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			KeyUp=false;
-		} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			KeyDown=false;
-		} else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			KeyLeft=false;
-		} else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			KeyRight=false;
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			KeyUp = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			KeyDown = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			KeyLeft = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			KeyRight = false;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			KeyW = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			KeyA = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			KeyS = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			KeyD = false;
+		}
+
 	}
 
 	public void updateMenuState() {
