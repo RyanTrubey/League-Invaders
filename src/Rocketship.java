@@ -9,7 +9,13 @@ public class Rocketship extends GameObject {
 	}
 
 	public void update() {
-
+		super.update();
+		if(x>LeagueInvaders.width) {
+			x=0;
+		}
+		if(x<0) {
+			x=LeagueInvaders.width;
+		}
 	}
 
 	public void draw(Graphics g) {
