@@ -25,9 +25,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	boolean KeyLeft;
 	boolean KeyRight;
 	boolean KeyW;
-	boolean KeyA;
-	boolean KeyD;
-	boolean KeyS;
+
 	ObjectManager om;
 
 	public GamePanel() {
@@ -42,7 +40,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		repaint();
+		if (!rocket.isAlive) {
+			currentstate = endstate;
+			rocket.isAlive = true;
+		}
+		System.out.println(currentstate);
 		if (currentstate == menustate) {
 			updateMenuState();
 		} else if (currentstate == gamestate) {
@@ -71,10 +73,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (KeyRight) {
 			rocket.x += rocket.speed;
 		}
-		if (KeyS) {
+		if (KeyW) {
 			om.addProjectile(new Projectile(rocket.x + 20, rocket.y, 10, 10));
 		}
 
+		repaint();
 	}
 
 	public void startGame() {
@@ -108,7 +111,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			} else {
 				currentstate = menustate;
 			}
+
 		}
+
 		if (e.getKeyCode() == KeyEvent.VK_I) {
 			if (currentstate == menustate) {
 				JOptionPane.showMessageDialog(null, "Press 'space' to shoot and use arrow keys to move.");
@@ -122,24 +127,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			KeyLeft = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			KeyRight = true;
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		} else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			om.addProjectile(new Projectile(rocket.x + 20, rocket.y, 10, 10));
+		} else if(e.getKeyCode() == KeyEvent.VK_W) {
+			KeyW=true;
 		}
-
-		if (e.getKeyCode() == KeyEvent.VK_W) {
-			KeyW = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			KeyA = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_S) {
-			KeyS = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
-			KeyD = true;
-		}
+		
 	}
 
 	@Override
@@ -153,18 +146,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			KeyLeft = false;
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			KeyRight = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_W) {
+		} else if (e.getKeyCode() == KeyEvent.VK_W) {
 			KeyW = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			KeyA = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_S) {
-			KeyS = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
-			KeyD = false;
 		}
 
 	}
@@ -175,12 +158,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateGameState() {
 		currentstate = gamestate;
-		om.update();
 		om.manageEnemies();
 		om.checkColision();
+		om.update();
 		om.purgeObjects();
-		if(rocket.isAlive == false) {
-			currentstate=endstate;
+		if (rocket.isAlive == false) {
+			currentstate = endstate;
+			om.reset();
+			rocket = new Rocketship(250, 700, 50, 50);
+			om.addRocket(rocket);
 		}
 	}
 

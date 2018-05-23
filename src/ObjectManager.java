@@ -69,15 +69,23 @@ public class ObjectManager {
 			if (rocket.collisionBox.intersects(a.collisionBox)) {
 				rocket.isAlive = false;
 			}
+			for (Projectile p : pList) {
 
-		}
-		for (Projectile p : pList) {
-			for (Alien a : aList) {
 				if (a.collisionBox.intersects(p.collisionBox)) {
 					a.isAlive = false;
 				}
-			}
 
+			}
 		}
+
+	}
+
+	public void reset() {
+		aList.clear();
+		pList.clear();
+	}
+
+	public void addRocket(Rocketship rocket) {
+		this.rocket = rocket;
 	}
 }

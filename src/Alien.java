@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Alien extends GameObject {
 	long moveTimer = 0;
-	int alienMoveTime = 100;
+	int alienMoveTime = 1000;
 
 	public Alien(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -12,10 +12,16 @@ public class Alien extends GameObject {
 
 	public void update() {
 		super.update();
-		y++;
+		y += 2;
+		x += new Random().nextInt(15);
+		x -= new Random().nextInt(15);
+		if(x<=0) {
+			x=LeagueInvaders.width;
+		} else if(x>=LeagueInvaders.width) {
+			x=0;
+		}
 		if (System.currentTimeMillis() - moveTimer >= alienMoveTime) {
-			x+=new Random().nextInt(35);
-			x-=new Random().nextInt(35);
+
 			moveTimer = System.currentTimeMillis();
 		}
 		if (y > 800) {
