@@ -25,7 +25,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	boolean KeyLeft;
 	boolean KeyRight;
 	boolean KeyW;
-
 	ObjectManager om;
 
 	public GamePanel() {
@@ -44,7 +43,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentstate = endstate;
 			rocket.isAlive = true;
 		}
-		System.out.println(currentstate);
+		
 		if (currentstate == menustate) {
 			updateMenuState();
 		} else if (currentstate == gamestate) {
@@ -154,6 +153,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateMenuState() {
 		currentstate = menustate;
+		om.setScore(0);
 	}
 
 	public void updateGameState() {
@@ -190,6 +190,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
 		om.draw(g);
+		g.setColor(Color.WHITE);
+		g.setFont(subfont2);
+		g.drawString("Score: " + om.getScore().toString(), 30, 40);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -198,5 +201,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.setFont(titlefont);
 		g.drawString("Game Over", 120, 400);
+		g.setFont(subfont2);
+		g.drawString("Score: " + om.getScore().toString(), 30, 40);
 	}
 }
