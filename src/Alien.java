@@ -15,10 +15,10 @@ public class Alien extends GameObject {
 		y += 2;
 		x += new Random().nextInt(15);
 		x -= new Random().nextInt(15);
-		if(x<=0) {
-			x=LeagueInvaders.width;
-		} else if(x>=LeagueInvaders.width) {
-			x=0;
+		if(x<=10) {
+			x+=25;
+		} else if(x>=LeagueInvaders.width-10) {
+			x-=25;
 		}
 		if (System.currentTimeMillis() - moveTimer >= alienMoveTime) {
 
@@ -30,7 +30,6 @@ public class Alien extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.GREEN);
-		g.fillRect(x, y, w, h);
+		g.drawImage(GamePanel.alienImg, x, y, w, h, null);
 	}
 }
