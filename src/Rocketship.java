@@ -16,6 +16,9 @@ public class Rocketship extends GameObject {
 		if(x<0) {
 			x=LeagueInvaders.width;
 		}
+		if (y >= LeagueInvaders.height-h) {
+			y=LeagueInvaders.height-h;
+		}
 	}
 
 	public void draw(Graphics g) {

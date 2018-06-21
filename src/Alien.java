@@ -24,7 +24,7 @@ public class Alien extends GameObject {
 
 			moveTimer = System.currentTimeMillis();
 		}
-		if (y > 800) {
+		if (y > LeagueInvaders.height) {
 			isAlive = false;
 		}
 	}

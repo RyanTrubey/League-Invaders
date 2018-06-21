@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 
 	public GamePanel() {
-		timer = new Timer(1000 / 500, this);
+		timer = new Timer(1000 / 60, this);
 		titlefont = new Font("Arial", Font.PLAIN, 48);
 		subfont = new Font("Arial", Font.PLAIN, 35);
 		subfont2 = new Font("Arial", Font.PLAIN, 27);
@@ -219,6 +219,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.WHITE);
 		g.setFont(subfont2);
 		g.drawString("Score: " + om.getScore().toString(), 30, 40);
+		om.draw(g);
 	}
 
 	public void drawEndState(Graphics g) {
