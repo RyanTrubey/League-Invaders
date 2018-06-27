@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -22,6 +23,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titlefont;
 	Font subfont;
 	Font subfont2;
+	JButton windowsize;
 	Rocketship rocket;
 	boolean KeyUp;
 	boolean KeyDown;
@@ -36,7 +38,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int space = maxspace;
 	ObjectManager om;
 
-
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titlefont = new Font("Arial", Font.PLAIN, 48);
@@ -44,7 +45,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		subfont2 = new Font("Arial", Font.PLAIN, 27);
 		rocket = new Rocketship(250, 700, 50, 50);
 		om = new ObjectManager(rocket);
-	
+
+
 		try {
 			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
 			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
@@ -58,6 +60,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		}
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -100,7 +103,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		space++;
 
-
 		repaint();
 	}
 
@@ -129,6 +131,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("hello2");
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentstate < endstate) {
 				currentstate++;
@@ -154,7 +157,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if (space >= maxspace) {
 				om.addProjectile(new Projectile(rocket.x + 20, rocket.y, 10, 10));
-				space=0;
+				space = 0;
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_W) {
 			KeyW = true;
