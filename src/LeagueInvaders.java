@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 
 public class LeagueInvaders {
 	JFrame frame;
-	static int width = 1920;
-	static int height = 1080;
+	static int width = 1280;
+	static int height = 720;
 	GamePanel gamepanel;
 	ControlPanel controls;
 	public static void main(String[] args) {
@@ -18,21 +18,20 @@ public class LeagueInvaders {
 	public LeagueInvaders() {
 		frame = new JFrame();
 		gamepanel = new GamePanel();
-		controls = new ControlPanel();
+		controls = new ControlPanel(frame, gamepanel);
 	}
 
 	public void setup() {
 		frame.setSize(width, height);
 		frame.setLayout(new BorderLayout());
-		frame.add(gamepanel, BorderLayout.CENTER);
-		frame.add(controls, BorderLayout.SOUTH);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setPreferredSize(new Dimension(width, height));
-		gamepanel.setSize(width, height-100);
+		gamepanel.setPreferredSize(new Dimension (width, height-100));
+		frame.add(controls, BorderLayout.CENTER);
+		frame.add(gamepanel, BorderLayout.NORTH);
 		frame.pack();
 		gamepanel.startGame();
 		frame.addKeyListener(gamepanel);
-		gamepanel.setFocusable(true);
+	//	gamepanel.setFocusable(true);
 	}
 }

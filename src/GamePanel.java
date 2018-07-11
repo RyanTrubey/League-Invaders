@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -37,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int maxspace = 50;
 	int space = maxspace;
 	ObjectManager om;
+	
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
@@ -45,7 +48,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		subfont2 = new Font("Arial", Font.PLAIN, 27);
 		rocket = new Rocketship(250, 700, 50, 50);
 		om = new ObjectManager(rocket);
-
+		System.out.println("something");
+		
 
 		try {
 			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
@@ -60,7 +64,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		}
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
