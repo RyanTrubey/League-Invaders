@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 
 public class ControlPanel extends JPanel implements ActionListener {
 	JButton windowsize;
-	JPanel panel;
+	JPanel gPanel;
+	JPanel cPanel;
 	JFrame frame;
 
 	public ControlPanel(JFrame frame, GamePanel gpanel) {
@@ -18,20 +19,33 @@ public class ControlPanel extends JPanel implements ActionListener {
 		windowsize.addActionListener(this);
 		windowsize.setSelected(false);
 		this.frame = frame;
-		panel = gpanel;
+		gPanel = gpanel;
+		cPanel = this;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 			if(LeagueInvaders.width == 1280) {
-				panel.setPreferredSize(new Dimension(1920 , 1080));
+				gPanel.setPreferredSize(new Dimension(1920 , 1080-100));
+				cPanel.setPreferredSize(new Dimension(1920, 100));
+				LeagueInvaders.width = 1920;
+				LeagueInvaders.height = 1080;
 			} else if (LeagueInvaders.width == 1920) {
-				panel.setPreferredSize(new Dimension(2560, 1440));
+				gPanel.setPreferredSize(new Dimension(2560, 1440-100));
+				cPanel.setPreferredSize(new Dimension(2560, 100));
+				LeagueInvaders.width = 2560;
+				LeagueInvaders.height = 1440;
 			} else if (LeagueInvaders.width == 2560) {
-				panel.setPreferredSize(new Dimension(3840, 2160));
+				gPanel.setPreferredSize(new Dimension(3840, 2160-100));
+				cPanel.setPreferredSize(new Dimension(3840, 100));
+				LeagueInvaders.width = 3840;
+				LeagueInvaders.height = 2160;
 			} else if (LeagueInvaders.width == 3840) {
-				panel.setPreferredSize(new Dimension(1280, 720));
+				gPanel.setPreferredSize(new Dimension(1280, 720-100));
+				cPanel.setPreferredSize(new Dimension(1280, 100));
+				LeagueInvaders.width = 1280;
+				LeagueInvaders.height = 720;
 			}
 			
 			frame.pack();
