@@ -22,7 +22,6 @@ public class LeagueInvaders {
 	}
 
 	public void setup() {
-		frame.setSize(width, height);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +30,8 @@ public class LeagueInvaders {
 		frame.add(gamepanel, BorderLayout.NORTH);
 		frame.pack();
 		gamepanel.startGame();
-		frame.addKeyListener(gamepanel);
-	//	gamepanel.setFocusable(true);
+		gamepanel.setFocusable(true);
+		gamepanel.requestFocus();
+		controls.setFocusable(false);
 	}
 }

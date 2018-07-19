@@ -49,7 +49,7 @@ public class ControlPanel extends JPanel implements ActionListener {
 			}
 			
 			frame.pack();
-		
+			gPanel.requestFocus();
 
 	}
 }

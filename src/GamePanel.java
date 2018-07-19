@@ -42,6 +42,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 
 	public GamePanel() {
+		addKeyListener(this);
 		timer = new Timer(1000 / 60, this);
 		titlefont = new Font("Arial", Font.PLAIN, 48);
 		subfont = new Font("Arial", Font.PLAIN, 35);
